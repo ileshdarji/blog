@@ -1,4 +1,5 @@
-{{ $cat := .Params.categories | first | default "general" }}
+{{ $cats := .Params.categories | default (slice "general") }}
+{{ $cat := index $cats 0 }}
 {{ $catSlug := $cat | urlize }}
 {{ $catClass := printf "category-%s" $catSlug }}
 
