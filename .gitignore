@@ -10,8 +10,15 @@ resources/
 .DS_Store
 Thumbs.db
 
+# Node
+node_modules/
+ai-test-gen/node_modules/
+vscode-extension/node_modules/
+
+# VS Code extension build output
+vscode-extension/out/
+
 # Editor
-.vscode/
 .idea/
 *.swp
 *.swo
