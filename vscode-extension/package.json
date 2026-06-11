@@ -1,0 +1,120 @@
+{
+  "name": "qa-gen",
+  "displayName": "QA Gen — AI Playwright Test Generator",
+  "description": "AI-powered Playwright test generation for your workspace. Powered by Claude AI. By QA with Ilesh.",
+  "version": "0.1.0",
+  "publisher": "qa-with-ilesh",
+  "license": "MIT",
+  "author": {
+    "name": "Ilesh Darji",
+    "email": "ileshdarji@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ileshdarji/qa-gen"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "playwright",
+    "testing",
+    "ai",
+    "test-generation",
+    "qa",
+    "claude"
+  ],
+  "icon": "icon.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "qaGen.generateTests",
+        "title": "QA Gen: Generate Tests",
+        "category": "QA Gen"
+      },
+      {
+        "command": "qaGen.findCoverageGaps",
+        "title": "QA Gen: Find Coverage Gaps",
+        "category": "QA Gen"
+      },
+      {
+        "command": "qaGen.setApiKey",
+        "title": "QA Gen: Set API Key",
+        "category": "QA Gen"
+      }
+    ],
+    "configuration": {
+      "title": "QA Gen",
+      "properties": {
+        "qaGen.testDirectory": {
+          "type": "string",
+          "default": "tests",
+          "description": "Root directory of your existing Playwright test suite (relative to workspace root)."
+        },
+        "qaGen.outputDirectory": {
+          "type": "string",
+          "default": "tests/generated",
+          "description": "Directory where generated test files will be written (relative to workspace root)."
+        },
+        "qaGen.sourceDirectory": {
+          "type": "string",
+          "default": "src",
+          "description": "Source directory to scan for coverage gaps (relative to workspace root)."
+        },
+        "qaGen.model": {
+          "type": "string",
+          "default": "claude-sonnet-4-6",
+          "enum": [
+            "claude-sonnet-4-6",
+            "claude-opus-4-5",
+            "claude-haiku-4-5"
+          ],
+          "enumDescriptions": [
+            "Claude Sonnet 4.6 — best balance of speed and quality (recommended)",
+            "Claude Opus 4.5 — highest quality, slower and more expensive",
+            "Claude Haiku 4.5 — fastest and cheapest, good for simple tests"
+          ],
+          "description": "Claude model to use for test generation."
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "qaGen.generateTests"
+        },
+        {
+          "command": "qaGen.findCoverageGaps"
+        },
+        {
+          "command": "qaGen.setApiKey"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.27.0",
+    "glob": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^2.27.0",
+    "typescript": "^5.5.0"
+  }
+}

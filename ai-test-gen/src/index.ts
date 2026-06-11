@@ -6,6 +6,7 @@ import path from 'node:path';
 import { scanTestSuite } from './scanner.js';
 import { generateTests } from './generator.js';
 import { writeGeneratedFile } from './writer.js';
+import { findCoverageGaps } from './coverage.js';
 
 const DEFAULT_MODEL = 'claude-sonnet-4-6';
 
@@ -162,6 +163,68 @@ program
       profile.commonImports.forEach(i => console.log(`  ${chalk.gray(i)}`));
     }
     console.log();
+  });
+
+// ── gaps command ─────────────────────────────────────────────────────────────
+program
+  .command('gaps')
+  .description('Find source files that have no corresponding Playwright spec')
+  .option('-s, --source-dir <path>', 'Source directory to scan', 'src')
+  .option('-d, --test-dir <path>', 'Playwright test directory', 'tests')
+  .option('-o, --output <path>', 'Output directory for generated tests', 'tests/generated')
+  .option('-m, --model <model>', `Claude model`, DEFAULT_MODEL)
+  .option('--generate', 'Auto-generate tests for every gap (requires ANTHROPIC_API_KEY)', false)
+  .action(async (opts) => {
+    printBanner();
+
+    const sourceDir = path.resolve(opts.sourceDir);
+    const testDir = path.resolve(opts.testDir);
+    const workspaceRoot = process.cwd();
+
+    const scanSpinner = ora('Scanning for coverage gaps…').start();
+    const gaps = await findCoverageGaps(sourceDir, testDir, workspaceRoot);
+    scanSpinner.stop();
+
+    if (gaps.length === 0) {
+      console.log(chalk.green('\n✔ No coverage gaps found — every source file has a spec!\n'));
+      return;
+    }
+
+    console.log(`\n${chalk.yellow(`⚠  ${gaps.length} file${gaps.length > 1 ? 's' : ''} without tests:\n`)}`);
+    gaps.forEach((g) => {
+      console.log(`  ${chalk.red('✗')} ${chalk.cyan(g.relativePath)}  ${chalk.gray(g.suggestedFeature)}`);
+    });
+    console.log();
+
+    if (!opts.generate) {
+      console.log(chalk.gray(`Run with ${chalk.bold('--generate')} to auto-generate tests for all gaps.\n`));
+      return;
+    }
+
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.error(chalk.red('✗ ANTHROPIC_API_KEY is required when using --generate'));
+      process.exit(1);
+    }
+
+    console.log(chalk.blue(`\nGenerating tests for ${gaps.length} file(s)…\n`));
+
+    const profile = await scanTestSuite(testDir);
+
+    for (const gap of gaps) {
+      const genSpinner = ora(`Generating: ${gap.relativePath}`).start();
+      try {
+        const generated = await generateTests(
+          { feature: gap.suggestedFeature, testDir, outputDir: path.resolve(opts.output), model: opts.model, verbose: false },
+          profile,
+        );
+        const writtenPath = writeGeneratedFile(generated, path.resolve(opts.output));
+        genSpinner.succeed(`${gap.relativePath} → ${chalk.cyan(path.relative(workspaceRoot, writtenPath))}`);
+      } catch (err) {
+        genSpinner.fail(`${gap.relativePath} — ${chalk.red(String(err))}`);
+      }
+    }
+
+    console.log(chalk.yellow('\n⚠  Review all generated files before committing.\n'));
   });
 
 program.parse();
