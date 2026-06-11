@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
+    <div class="w-20 h-20 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
+      ID
+    </div>
+    <div>
+      <h1 class="text-4xl font-extrabold text-slate-900 mb-1">Ilesh Darji</h1>
+      <p class="text-lg text-slate-500">Senior QA Engineer · Contractor · Creator of QA with Ilesh</p>
+      <div class="flex gap-4 mt-3">
+        <a href="{{ .Site.Params.linkedIn }}" target="_blank" class="text-blue-600 text-sm font-medium hover:underline">LinkedIn</a>
+        <a href="{{ .Site.Params.youtube }}" target="_blank" class="text-blue-600 text-sm font-medium hover:underline">YouTube</a>
+        <a href="{{ .Site.Params.github }}" target="_blank" class="text-blue-600 text-sm font-medium hover:underline">GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="prose prose-slate prose-lg max-w-none
+    prose-headings:font-bold prose-headings:text-slate-900
+    prose-a:text-blue-600
+    prose-strong:text-slate-900
+    ">
+    {{ .Content }}
+  </div>
+
+  <!-- CTA -->
+  <div class="mt-12">
+    {{ partial "newsletter-cta.html" . }}
+  </div>
+
+</div>
+{{ end }}

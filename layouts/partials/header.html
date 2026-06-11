@@ -1,0 +1,53 @@
+<header class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm">QA</div>
+        <div class="leading-tight">
+          <span class="font-bold text-slate-900 text-lg group-hover:text-blue-600 transition-colors">QA with Ilesh</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}"
+           class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors {{ if or (eq $.RelPermalink .URL) (hasPrefix $.RelPermalink .URL) }}text-blue-600 bg-blue-50{{ end }}">
+          {{ .Name }}
+        </a>
+        {{ end }}
+      </nav>
+
+      <!-- CTA -->
+      <a href="/newsletter/" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        The QA Edge
+      </a>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors" aria-label="Toggle menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav id="mobile-menu" class="hidden md:hidden pb-4">
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}" class="block px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+        {{ .Name }}
+      </a>
+      {{ end }}
+      <a href="/newsletter/" class="mt-2 block px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg text-center">
+        Subscribe to The QA Edge
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+</script>

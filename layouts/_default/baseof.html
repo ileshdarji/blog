@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }} — {{ .Site.Params.description }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Params.description | default .Site.Params.description }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ range .AlternativeOutputFormats -}}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+  {{ end }}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+          typography: {
+            DEFAULT: {
+              css: {
+                maxWidth: 'none',
+                code: { fontWeight: '400' },
+                'code::before': { content: '""' },
+                'code::after': { content: '""' },
+              },
+            },
+          },
+        }
+      },
+      plugins: [],
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .prose h1, .prose h2, .prose h3, .prose h4 { font-weight: 700; color: #0f172a; }
+    .prose a { color: #2563eb; text-decoration: underline; }
+    .prose code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; font-family: 'JetBrains Mono', monospace; }
+    .prose pre { background: #0f172a; border-radius: 8px; overflow-x: auto; }
+    .prose pre code { background: transparent; padding: 0; color: #e2e8f0; }
+    .prose blockquote { border-left: 4px solid #2563eb; background: #eff6ff; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; }
+    .prose ul li::marker { color: #2563eb; }
+    .prose ol li::marker { color: #2563eb; }
+    .category-playwright { background: #f3e8ff; color: #7e22ce; }
+    .category-api-testing { background: #dcfce7; color: #15803d; }
+    .category-test-architecture { background: #dbeafe; color: #1d4ed8; }
+    .category-ai-for-qa { background: #ffe4e6; color: #be123c; }
+    .category-career-growth { background: #fef9c3; color: #b45309; }
+    .category-contracting { background: #cffafe; color: #0e7490; }
+    .category-default { background: #f1f5f9; color: #475569; }
+  </style>
+  {{ template "_internal/google_analytics.html" . }}
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased">
+  {{ partial "header.html" . }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

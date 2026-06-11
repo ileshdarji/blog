@@ -1,0 +1,81 @@
+{{ define "main" }}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+  <div class="text-center mb-12">
+    <h1 class="text-5xl font-extrabold text-slate-900 mb-4">Templates & Resources</h1>
+    <p class="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+      Battle-tested templates, checklists, and starter kits built from real client engagements.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Template: Playwright Framework Starter -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-purple-200 transition-all group">
+      <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">🎭</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-purple-700 transition-colors">Playwright Framework Starter Kit</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">Pre-configured Playwright setup with fixtures, page objects, API helpers, and CI config.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+    <!-- Template: QA Lead Checklist -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-blue-200 transition-all group">
+      <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">✅</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">QA Lead Checklist</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">Everything you need to audit a team's testing maturity — coverage, CI/CD, reporting, and culture.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+    <!-- Template: Release Readiness Checklist -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-emerald-200 transition-all group">
+      <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">🚀</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">Release Readiness Checklist</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">Stop releasing bugs to production. The exact checklist I use with clients to build release confidence.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+    <!-- Template: Test Strategy Template -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-cyan-200 transition-all group">
+      <div class="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">📋</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-cyan-700 transition-colors">Test Strategy Template</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">A structured test strategy document that impresses stakeholders and guides engineering teams.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+    <!-- Template: QA Interview Prep Kit -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-rose-200 transition-all group">
+      <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">🎯</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-rose-700 transition-colors">Interview Preparation Kit</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">The exact questions I've used and been asked at senior QA and contracting interviews. With model answers.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+    <!-- Template: Contractor CV Template -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-amber-200 transition-all group">
+      <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mb-4">
+        <span class="text-lg">📄</span>
+      </div>
+      <h3 class="font-bold text-slate-900 mb-2 group-hover:text-amber-700 transition-colors">QA Contractor CV Template</h3>
+      <p class="text-sm text-slate-500 mb-4 leading-relaxed">A CV structure optimised for landing day-rate contracts at large enterprises and public sector clients.</p>
+      <span class="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Coming Soon</span>
+    </div>
+
+  </div>
+
+  <!-- Notify me CTA -->
+  <div class="mt-16">
+    {{ partial "newsletter-cta.html" . }}
+  </div>
+
+</div>
+{{ end }}

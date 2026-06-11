@@ -1,0 +1,88 @@
+baseURL = "https://ileshdarji.com/"
+languageCode = "en-us"
+title = "QA with Ilesh"
+enableRobotsTXT = true
+enableGitInfo = false
+googleAnalytics = "G-2C8HSWCCE5"
+
+[params]
+  description = "Helping QA Engineers become highly-paid, AI-enabled Quality Engineers."
+  author = "Ilesh Darji"
+  tagline = "Real strategies. Real contracts. Real results."
+  newsletterName = "The QA Edge"
+  linkedIn = "https://linkedin.com/in/ileshdarji"
+  youtube = "https://youtube.com/@QAwithIlesh"
+  github = "https://github.com/ileshdarji"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[pagination]
+  pagerSize = 10
+
+[permalinks]
+  posts = "/:year/:month/:slug/"
+
+[[menus.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menus.main]]
+  name = "Categories"
+  url = "/categories/"
+  weight = 20
+
+[[menus.main]]
+  name = "Newsletter"
+  url = "/newsletter/"
+  weight = 30
+
+[[menus.main]]
+  name = "Templates"
+  url = "/templates/"
+  weight = 40
+
+[[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 50
+
+[[menus.footer]]
+  name = "Playwright"
+  url = "/categories/playwright/"
+  weight = 10
+
+[[menus.footer]]
+  name = "API Testing"
+  url = "/categories/api-testing/"
+  weight = 20
+
+[[menus.footer]]
+  name = "AI for QA"
+  url = "/categories/ai-for-qa/"
+  weight = 30
+
+[[menus.footer]]
+  name = "Career Growth"
+  url = "/categories/career-growth/"
+  weight = 40
+
+[[menus.footer]]
+  name = "Contracting"
+  url = "/categories/contracting/"
+  weight = 50
+
+[[menus.footer]]
+  name = "Test Architecture"
+  url = "/categories/test-architecture/"
+  weight = 60
